@@ -1,0 +1,31 @@
+{
+  "hash": "2a41f199",
+  "configHash": "c5489905",
+  "lockfileHash": "14eff66f",
+  "browserHash": "7dcfc16f",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "703d80f9",
+      "needsInterop": true
+    },
+    "react-bootstrap/Dropdown": {
+      "src": "../../node_modules/react-bootstrap/esm/Dropdown.js",
+      "file": "react-bootstrap_Dropdown.js",
+      "fileHash": "a6549e2f",
+      "needsInterop": false
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "f98287b1",
+      "needsInterop": true
+    }
+  },
+  "chunks": {
+    "chunk-WYQRYOQT": {
+      "file": "chunk-WYQRYOQT.js"
+    }
+  }
+}

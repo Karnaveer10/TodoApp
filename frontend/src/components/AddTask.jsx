@@ -1,7 +1,7 @@
 import React from 'react'
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useState } from 'react';
-const AddTask = () => {
+const AddTask = ({setShowAddTask}) => {
     const [form, setform] = useState({
         title: "",
         description: "",
@@ -12,6 +12,8 @@ const AddTask = () => {
     })
     const handleSubmit=async()=>{
         console.log(form);
+        setShowAddTask(false);
+
     }
     return (
         <div className='card flex flex-col gap-3 p-4 bg-slate-50 rounded-lg w-2/4 mx-auto mt-5 text-left'>
