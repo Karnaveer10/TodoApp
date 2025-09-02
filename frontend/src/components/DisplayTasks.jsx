@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 const DisplayTasks = ({ setShowAddTask, setEditTaskId }) => {
     const [tasks, settasks] = useState([])
+    const [searchTerm, setSearchTerm] = useState("");
     const [filters, setFilters] = useState({
         status: 'All',
         priority: 'All',
@@ -57,7 +58,7 @@ const DisplayTasks = ({ setShowAddTask, setEditTaskId }) => {
             <div className=' rounded-lg w-auto mt-2'>
                 <div className='flex items-center justify-center gap-3   p-3 bg-slate-50   mx-auto w-3/4'>
                     <img src="./search.svg" alt="" />
-                    <input type="text" id="search-navbar" className="block  border p-2 w-full text-sm text-gray-900  rounded-lg bg-gray-50 focus:outline-none" placeholder="Search..." />
+                    <input type="text" id="search-navbar" value={searchTerm} onChange={(e) => { setSearchTerm(e.target.value) }} className="block  border p-2 w-full text-sm text-gray-900  rounded-lg bg-gray-50 focus:outline-none" placeholder="Search..." />
 
                 </div>
                 <div className='flex items-center justify-evenly gap-5  p-3 bg-slate-50   mx-auto w-3/4'>
@@ -117,11 +118,19 @@ const DisplayTasks = ({ setShowAddTask, setEditTaskId }) => {
             <div className='Tasks'>
                 {tasks.map((task, index) =>
                     // Add filtering condition here
-                    ((filters.category === "All" || task.category === filters.category) &&
-                        (filters.priority === "All" || task.priority === filters.priority) &&
+                    ((searchTerm === "" || task.title.toLowerCase().includes(searchTerm.toLowerCase()))
+                        &&
+                        // Category filter
+                        (filters.category === "All" || task.category === filters.category)
+                        &&
+                        // Priority filter
+                        (filters.priority === "All" || task.priority === filters.priority)
+                        &&
+                        // Status filter
                         (filters.status === "All" ||
                             (filters.status === "Completed" && task.completed === 1) ||
-                            (filters.status === "Pending" && task.completed === 0))
+                            (filters.status === "Pending" && task.completed === 0)
+                        )
                     ) && (
                         <div key={task._id || index} className="card flex flex-col gap-2 p-4 bg-slate-50 rounded-lg w-3/4 mx-auto mt-5">
                             <div className='flex items-center justify-between'>
@@ -169,7 +178,7 @@ const DisplayTasks = ({ setShowAddTask, setEditTaskId }) => {
                                 </div>
                                 <div className="tags flex items-center gap-2">
                                     Priority :
-                                    <div className='bg-red-300 rounded-3xl p-2 w-auto text-[12px]'>{task.priority ||"No priority"}</div>
+                                    <div className='bg-red-300 rounded-3xl p-2 w-auto text-[12px]'>{task.priority || "No priority"}</div>
                                 </div>
 
                                 <div className="due">
