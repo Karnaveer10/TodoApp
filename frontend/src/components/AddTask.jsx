@@ -9,7 +9,7 @@ const AddTask = ({ setShowAddTask, editTaskId, setEditTaskId }) => {
         description: "",
         priority: "",
         category: "",
-        dueDate: null,
+        dueDate: "",
         tags: [],
         completed: false
     })
@@ -47,13 +47,15 @@ const AddTask = ({ setShowAddTask, editTaskId, setEditTaskId }) => {
             if (!editTaskId){
             let url = "http://localhost:3000/api"
             let newurl = url + '/addTask'
-            const res = await axios.post(newurl, form)
+            const newform = {...form, dueDate: form.dueDate ? new Date(form.dueDate) : null};
+            const res = await axios.post(newurl, newform)
             console.log(res.data)
             }
             else if (editTaskId){
             let url = "http://localhost:3000/api"
             let newurl = url + '/updateTask'
             const res = await axios.post(newurl, {form, id: editTaskId})
+            setEditTaskId("");
             console.log(res.data)
             }
         }
@@ -63,7 +65,7 @@ const AddTask = ({ setShowAddTask, editTaskId, setEditTaskId }) => {
 
     }
     return (
-        <div className='card flex flex-col gap-3 p-4 bg-slate-50 rounded-lg w-2/4 mx-auto mt-5 text-left'>
+        <div className='card flex flex-col gap-3 p-4 bg-slate-50 rounded-lg w-1/3 mx-auto mt-5 text-left'>
             <h2 className='mx-auto'>Task</h2>
             <h4> Title</h4>
             <input type="text" className='border p-2 w-full text-sm text-gray-900  rounded-lg bg-gray-50 focus:outline-none' placeholder='Enter ask Title' value={form.title} onChange={(e) => { setform({ ...form, title: e.target.value }) }} />
@@ -104,7 +106,7 @@ const AddTask = ({ setShowAddTask, editTaskId, setEditTaskId }) => {
                 </div>
             </div>
             <h4>Due Date</h4>
-            <input type="date" className='border p-2 w-full text-sm text-gray-900  rounded-lg bg-gray-50 focus:outline-none' placeholder='Due Date' value={form.dueDate || ""} onChange={(e) => { setform({ ...form, dueDate: new Date(e.target.value) }) }} />
+            <input type="date" className='border p-2 w-full text-sm text-gray-900  rounded-lg bg-gray-50 focus:outline-none' placeholder='Due Date' value={form.dueDate || ""} onChange={(e) => { setform({ ...form, dueDate: (e.target.value) }) }} />
             <h4>Tags</h4>
             <input
                 type="text"
