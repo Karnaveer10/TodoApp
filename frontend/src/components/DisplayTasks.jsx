@@ -1,13 +1,29 @@
 import React from 'react'
 import Dropdown from 'react-bootstrap/Dropdown';
-
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 const DisplayTasks = () => {
+    // useEffect(() => {
+    //   const fetchTasks = async () => {
+    //     try{
+    //         let url = "http://localhost:3000/api"
+    //         let newurl = url+'/getTasks'
+    //         const res = await axios.get(newurl)
+    //         console.log(res.data)
+    //     }catch(error){
+    //         console.log(error)
+    //     }
+    //   }
+    //   fetchTasks();
+      
+    // }, [])
+    
     return (
         <>
             <div className=' rounded-lg w-auto mt-2'>
                 <div className='flex items-center justify-center gap-3   p-3 bg-slate-50   mx-auto w-3/4'>
                     <img src="./search.svg" alt="" />
-                    <input type="text" id="search-navbar" class="block  border p-2 w-full text-sm text-gray-900  rounded-lg bg-gray-50 focus:outline-none" placeholder="Search..." />
+                    <input type="text" id="search-navbar" className="block  border p-2 w-full text-sm text-gray-900  rounded-lg bg-gray-50 focus:outline-none" placeholder="Search..." />
 
                 </div>
                 <div className='flex items-center justify-evenly gap-5  p-3 bg-slate-50   mx-auto w-3/4'>
@@ -69,7 +85,7 @@ const DisplayTasks = () => {
 
                         <h2>Task 1</h2>
                         <span className="operation flex items-center justify-center gap-3">
-                            <button type="button" class="  flex justify-center items-center text-white bg-gradient-to-r from-green-400 to-green-600 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-3 py-2 text-center me-2 mb-2 gap-3">
+                            <button type="button" className="  flex justify-center items-center text-white bg-gradient-to-r from-green-400 to-green-600 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-3 py-2 text-center me-2 mb-2 gap-3">
 
                                 Complete Task
 

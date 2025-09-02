@@ -1,6 +1,7 @@
 import React from 'react'
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useState } from 'react';
+import axios from 'axios';
 const AddTask = ({setShowAddTask}) => {
     const [form, setform] = useState({
         title: "",
@@ -8,11 +9,21 @@ const AddTask = ({setShowAddTask}) => {
         priority: "",
         category:"",
         dueDate:null,
-        tags:""
+        tags:"",
+        completed:false
     })
     const handleSubmit=async()=>{
         console.log(form);
         setShowAddTask(false);
+        try{
+            let url = "http://localhost:3000/api"
+            let newurl = url+'/addTask'
+            const res = await axios.post(newurl,form)
+            console.log(res.data)
+        }
+        catch(error) {
+            console.log(error)
+        }
 
     }
     return (

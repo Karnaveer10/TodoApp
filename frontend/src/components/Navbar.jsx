@@ -6,7 +6,7 @@ const Navbar = ({ setShowAddTask, showAddTask }) => {
             <ul className='flex items-center justify-center gap-10'>
                 <li><button><img src="/analytics.svg" alt="Analytics" className='w-12 hover:bg-slate-200 rounded-lg p-1' /></button></li>
                 <li><button><img src="/theme.svg" alt="Theme" className='w-12 hover:bg-slate-200 rounded-lg p-1' /></button></li>
-                <li><button type="button" onClick={() => setShowAddTask(true)} disabled={showAddTask} class=" flex disabled:opacity-50 disabled:cursor-not-allowed justify-center items-center text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-5 py-3 text-center me-2 mb-2 gap-3">
+                <li><button type="button" onClick={() => setShowAddTask(true)} disabled={showAddTask} className=" flex disabled:opacity-50 disabled:cursor-not-allowed justify-center items-center text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-5 py-3 text-center me-2 mb-2 gap-3">
 
                     Add Task
                     
