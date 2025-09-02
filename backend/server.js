@@ -18,8 +18,15 @@ app.get("/", (req, res) => {
   res.send("API Working")
 })
 app.get('/api/getTasks',  async(req,res)=>{
+    try{
     const Taskdocs = await Task.find({})
-    console.log(Taskdocs)
+    res.json(Taskdocs)
+    }
+    catch(error){
+      console.log(error)
+      res.json({success:false})
+    }
+    
 })
 app.post('/api/addTask', async(req,res)=>{
   try{

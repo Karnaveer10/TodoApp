@@ -3,21 +3,22 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 const DisplayTasks = () => {
-    // useEffect(() => {
-    //   const fetchTasks = async () => {
-    //     try{
-    //         let url = "http://localhost:3000/api"
-    //         let newurl = url+'/getTasks'
-    //         const res = await axios.get(newurl)
-    //         console.log(res.data)
-    //     }catch(error){
-    //         console.log(error)
-    //     }
-    //   }
-    //   fetchTasks();
-      
-    // }, [])
-    
+    const [tasks, settasks] = useState([])
+    useEffect(() => {
+        const fetchTasks = async () => {
+            try {
+                let url = "http://localhost:3000/api"
+                let newurl = url + '/getTasks'
+                const res = await axios.get(newurl)
+
+                settasks(res.data)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        fetchTasks();
+
+    }, [])
     return (
         <>
             <div className=' rounded-lg w-auto mt-2'>
@@ -79,51 +80,69 @@ const DisplayTasks = () => {
             </div>
 
             <div className='Tasks'>
-                <div className="card flex flex-col gap-2 p-4 bg-slate-50 rounded-lg w-3/4 mx-auto mt-5 ">
+                {tasks.map((task, index) => (
+                    <div key={task._id || index}
+                        className="card flex flex-col gap-2 p-4 bg-slate-50 rounded-lg w-3/4 mx-auto mt-5">
+                        <div className='flex items-center justify-between'>
+                            <h2>{task.title}</h2>
+                            <span className="operation flex items-center justify-center gap-3">
+                                <button type="button" className="flex justify-center items-center text-white bg-gradient-to-r from-green-400 to-green-600 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-3 py-2 text-center gap-3">
+                                    Complete Task
+                                </button>
 
-                    <div className='flex items-center justify-between'>
+                                <lord-icon
+                                    src="https://cdn.lordicon.com/gwlusjdu.json"
+                                    trigger="hover"
+                                    colors="primary:#1591EA"
+                                    style={{ width: "25px", height: "25px", cursor: "pointer" }}
+                                    onClick={() => { /* Complete action */ }}
+                                />
 
-                        <h2>Task 1</h2>
-                        <span className="operation flex items-center justify-center gap-3">
-                            <button type="button" className="  flex justify-center items-center text-white bg-gradient-to-r from-green-400 to-green-600 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-3 py-2 text-center me-2 mb-2 gap-3">
-
-                                Complete Task
-
-                            </button>
-                            <lord-icon
-                                src="https://cdn.lordicon.com/gwlusjdu.json"
-                                trigger="hover"
-                                colors="primary:#1591EA"
-
-                                style={{ "width": "25px", "height": "25px", "cursor": "pointer" }}
-                                onClick={() => { }}
-                            >
-                            </lord-icon>
-                            <lord-icon
-                                src="https://cdn.lordicon.com/skkahier.json"
-                                trigger="hover"
-                                colors="primary:#1591EA"
-                                onClick={() => { }}
-                                style={{ "width": "25px", "height": "25px", "cursor": "pointer" }}>
-                            </lord-icon>
-                        </span>
-                    </div>
-
-                    <p>description Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident molestias tempora earum.</p>
-                    <div className="info flex items-center justify-start gap-5">
-                        <div className="tags flex items-center gap-2">Tags :
-                            <div className='bg-blue-200 rounded-3xl p-2 w-auto text-[12px] '>work backend</div>
+                                <lord-icon
+                                    src="https://cdn.lordicon.com/skkahier.json"
+                                    trigger="hover"
+                                    colors="primary:#1591EA"
+                                    style={{ width: "25px", height: "25px", cursor: "pointer" }}
+                                    onClick={() => { /* Delete action */ }}
+                                />
+                            </span>
                         </div>
-                        <div className="tags flex items-center gap-2">Category :
-                            <div className='bg-yellow-200 rounded-3xl p-2 w-auto text-[12px] '>work</div>
+
+                        <p>{task.description || "No description."}</p>
+
+                        <div className="info flex items-center justify-start gap-5">
+                            <div className="tags flex items-center gap-2">
+                                Tags :
+                                {task.tags && task.tags.length > 0 ? (
+                                    task.tags.map((tag, i) => (
+                                        <div
+                                            key={i}
+                                            className='bg-blue-200 rounded-3xl p-2 w-auto text-[12px]'
+                                        >
+                                            {tag}
+                                        </div>
+                                    ))
+                                ) : (
+                                    <div className='bg-gray-200 rounded-3xl p-2 w-auto text-[12px]'>No tags</div>
+                                )}
+
+                            </div>
+
+                            <div className="tags flex items-center gap-2">
+                                Category :
+                                <div className='bg-yellow-200 rounded-3xl p-2 w-auto text-[12px]'>
+                                    {task.category || "No category"}
+                                </div>
+                            </div>
+
+                            <div className="due">
+                                Due on {task.dueDate ? new Date(task.dueDate).toLocaleDateString() : "N/A"}
+                            </div>
                         </div>
-                        <div className="due">Due on 12/2/34</div>
                     </div>
+                ))}
 
 
-
-
-                </div>
             </div>
         </>
     )
