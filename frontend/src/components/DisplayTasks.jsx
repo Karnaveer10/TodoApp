@@ -2,7 +2,7 @@ import React from 'react'
 import Dropdown from 'react-bootstrap/Dropdown';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-const DisplayTasks = () => {
+const DisplayTasks = ({setShowAddTask ,setEditTaskId}) => {
     const [tasks, settasks] = useState([])
     useEffect(() => {
         const fetchTasks = async () => {
@@ -30,6 +30,11 @@ const DisplayTasks = () => {
         }catch(error){
             console.log(error)
         }
+    }
+    const handleUpdate= (id)=>{
+        setEditTaskId(id)
+        setShowAddTask(true)
+
     }
     return (
         <>
@@ -107,7 +112,7 @@ const DisplayTasks = () => {
                                     trigger="hover"
                                     colors="primary:#1591EA"
                                     style={{ width: "25px", height: "25px", cursor: "pointer" }}
-                                    onClick={()=>{}}
+                                    onClick={()=>{handleUpdate(task._id)}}
                                 />
 
                                 <lord-icon

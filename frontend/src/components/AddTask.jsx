@@ -1,9 +1,10 @@
 import React from 'react'
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useState } from 'react';
+import { useEffect } from 'react';
 import axios from 'axios';
-const AddTask = ({ setShowAddTask }) => {
-    const [form, setform] = useState({
+const AddTask = ({ setShowAddTask, editTaskId, setEditTaskId }) => {
+     const [form, setform] = useState({
         title: "",
         description: "",
         priority: "",
@@ -12,14 +13,49 @@ const AddTask = ({ setShowAddTask }) => {
         tags: [],
         completed: false
     })
+    useEffect(() => {
+        const getTaskById = async() => {
+            try {
+                let url = "http://localhost:3000/api"
+                let newurl = url + '/gettaskbyid'
+                const res = await axios.get(`${newurl}/${editTaskId}`);
+
+                
+                setform({
+                    title: res.data.title,
+                    description: res.data.description,
+                    priority: res.data.priority, 
+                    category: res.data.category,
+                    dueDate: res.data.dueDate ? res.data.dueDate.split("T")[0] : "",
+                    tags: res.data.tags,
+                    completed: res.data.completed
+                })
+            }
+            catch (error) {
+                console.log(error)
+            }
+        }
+        getTaskById();
+    }, [editTaskId])
+
+   
     const handleSubmit = async () => {
-        console.log(form);
+        
         setShowAddTask(false);
+        
         try {
+            if (!editTaskId){
             let url = "http://localhost:3000/api"
             let newurl = url + '/addTask'
             const res = await axios.post(newurl, form)
             console.log(res.data)
+            }
+            else if (editTaskId){
+            let url = "http://localhost:3000/api"
+            let newurl = url + '/updateTask'
+            const res = await axios.post(newurl, {form, id: editTaskId})
+            console.log(res.data)
+            }
         }
         catch (error) {
             console.log(error)
@@ -68,13 +104,13 @@ const AddTask = ({ setShowAddTask }) => {
                 </div>
             </div>
             <h4>Due Date</h4>
-            <input type="date" className='border p-2 w-full text-sm text-gray-900  rounded-lg bg-gray-50 focus:outline-none' placeholder='Due Date' valeu={form.dueDate ? form.dueDate.toISOString().split("T")[0] : ""} onChange={(e) => { setform({ ...form, dueDate: new Date(e.target.value) }) }} />
+            <input type="date" className='border p-2 w-full text-sm text-gray-900  rounded-lg bg-gray-50 focus:outline-none' placeholder='Due Date' value={form.dueDate || ""} onChange={(e) => { setform({ ...form, dueDate: new Date(e.target.value) }) }} />
             <h4>Tags</h4>
             <input
                 type="text"
                 className="border p-2 w-full text-sm text-gray-900 rounded-lg bg-gray-50 focus:outline-none"
                 placeholder="Enter Tags (comma separated)"
-                value={form.tags.join(', ')} 
+                value={form.tags.join(', ')}
                 onChange={(e) => {
                     const tagsArray = e.target.value.split(',').map(tag => tag.trim());
                     setform({ ...form, tags: tagsArray });
