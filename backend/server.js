@@ -50,7 +50,18 @@ app.post('/api/addTask', async(req,res)=>{
     res.send({success:false})
   }
 })
+app.post('/api/deleteTask', async(req,res)=>{
 
+  const {id} = req.body
+  try{
+  const delDoc = await Task.findByIdAndDelete(id);
+  res.json ({success:true})
+  }catch(error){
+    console.log(error)
+    res.json ({success:false})
+  }
+
+})
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);

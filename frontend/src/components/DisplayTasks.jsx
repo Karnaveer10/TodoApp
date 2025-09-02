@@ -19,6 +19,18 @@ const DisplayTasks = () => {
         fetchTasks();
 
     }, [])
+    const handleDelete = async(id)=>{
+        try{
+            let url = "http://localhost:3000/api"
+            let newurl = url + '/deleteTask'
+            const res = await axios.post(newurl, {id})
+            console.log(res.data)
+            settasks(tasks.filter(task=>task._id!==id))
+
+        }catch(error){
+            console.log(error)
+        }
+    }
     return (
         <>
             <div className=' rounded-lg w-auto mt-2'>
@@ -95,7 +107,7 @@ const DisplayTasks = () => {
                                     trigger="hover"
                                     colors="primary:#1591EA"
                                     style={{ width: "25px", height: "25px", cursor: "pointer" }}
-                                    onClick={() => { /* Complete action */ }}
+                                    onClick={()=>{}}
                                 />
 
                                 <lord-icon
@@ -103,7 +115,7 @@ const DisplayTasks = () => {
                                     trigger="hover"
                                     colors="primary:#1591EA"
                                     style={{ width: "25px", height: "25px", cursor: "pointer" }}
-                                    onClick={() => { /* Delete action */ }}
+                                    onClick={() => {handleDelete(task._id)}}
                                 />
                             </span>
                         </div>
