@@ -2,13 +2,14 @@ import { useState } from 'react'
 import Navbar from './components/Navbar'
 // import './App.css'
 import Task from './components/DisplayTasks'
+import MainPage from './components/Main'
 function App() {
 
 
   return (
     <>
-      <Navbar></Navbar>
-      <Task></Task>
+     
+      <MainPage></MainPage>
     </>
   )
 }
