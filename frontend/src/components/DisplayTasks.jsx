@@ -53,15 +53,29 @@ const DisplayTasks = ({ setShowAddTask, setEditTaskId }) => {
             [filterType]: value,
         }));
     }
+    const handleComplete = async (taskId) => {
+        settasks(prev => prev.map(task =>
+            task._id === taskId ? { ...task, completed: 1 } : task
+        ));
+
+        try {
+            let url = "http://localhost:3000/api"
+            let newurl = url + '/completeTask'
+            await axios.post(newurl, { id: taskId });
+        } catch (error) {
+            console.error(error);
+
+        }
+    };
     return (
         <>
             <div className=' rounded-lg w-auto mt-2'>
-                <div className='flex items-center justify-center gap-3   p-3 bg-slate-50   mx-auto w-3/4'>
+                <div className='flex items-center justify-center gap-3   p-3 bg-slate-50   mx-auto w-3/5'>
                     <img src="./search.svg" alt="" />
                     <input type="text" id="search-navbar" value={searchTerm} onChange={(e) => { setSearchTerm(e.target.value) }} className="block  border p-2 w-full text-sm text-gray-900  rounded-lg bg-gray-50 focus:outline-none" placeholder="Search..." />
 
                 </div>
-                <div className='flex items-center justify-evenly gap-5  p-3 bg-slate-50   mx-auto w-3/4'>
+                <div className='flex items-center justify-evenly gap-5  p-3 bg-slate-50   mx-auto w-3/5'>
                     <div className='Staus select'>
                         <select
                             className="block w-full p-2 text-sm  border border-gray-300 rounded-lg font-semibold bg-blue-300 focus:outline-none focus:ring-1 focus:ring-blue-500"
@@ -128,15 +142,17 @@ const DisplayTasks = ({ setShowAddTask, setEditTaskId }) => {
                         &&
                         // Status filter
                         (filters.status === "All" ||
-                            (filters.status === "Completed" && task.completed === 1) ||
-                            (filters.status === "Pending" && task.completed === 0)
+                            (filters.status === "Completed" && task.completed) ||
+                            (filters.status === "Pending" && !task.completed)
                         )
                     ) && (
-                        <div key={task._id || index} className="card flex flex-col gap-2 p-4 bg-slate-50 rounded-lg w-3/4 mx-auto mt-5">
+                        <div key={task._id || index} className={`card flex flex-col gap-2 p-4 rounded-lg w-3/5 mx-auto mt-5 ${task.completed ? " opacity-35" : "bg-slate-50"
+                            }`}>
                             <div className='flex items-center justify-between'>
-                                <h2>{task.title}</h2>
-                                <span className="operation flex items-center justify-center gap-3">
-                                    <button type="button" className="flex justify-center items-center text-white bg-gradient-to-r from-green-400 to-green-600 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-3 py-2 text-center gap-3">
+                                <h2 className={`${task.completed ? "line-through text-gray-400" : ""}`}>
+                                    {task.title}
+                                </h2>                                <span className="operation flex items-center justify-center gap-3">
+                                    <button type="button" onClick={() => handleComplete(task._id)} className="flex justify-center items-center text-white bg-gradient-to-r from-green-400 to-green-600 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-3 py-2 text-center gap-3">
                                         Complete Task
                                     </button>
 

@@ -96,13 +96,24 @@ app.post('/api/updateTask', async (req, res) => {
         { new: true } // return the updated document
       );
       res.json({ success: true });
-    } 
+    }
   } catch (error) {
     console.log(error);
     res.json({ success: false, error: error.message });
   }
 });
+app.post('/api/completeTask', async (req, res) => {
+  try {
+    const { id } = req.body
+    const task = await Task.findByIdAndUpdate(id, {
+      completed: true
+    })
+    res.json({ success: true });
+  } catch (error) {
+    res.json({ success: false })
+  }
 
+})
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
