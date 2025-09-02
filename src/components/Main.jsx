@@ -7,7 +7,7 @@ const Main = () => {
     const [showAddTask, setShowAddTask] = useState(false);
     return (
         <>
-            <Navbar setShowAddTask={setShowAddTask} />
+            <Navbar  setShowAddTask={setShowAddTask} showAddTask={showAddTask} />
             {showAddTask ? <AddTask setShowAddTask={setShowAddTask} /> : <DisplayTasks />}
         </>
     )

@@ -37,6 +37,19 @@ const DisplayTasks = () => {
                     </Dropdown>
                     <Dropdown>
                         <Dropdown.Toggle variant="primary" id="dropdown-basic">
+                            Category
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+                            <Dropdown.Item >Work</Dropdown.Item>
+                            <Dropdown.Item >Personal</Dropdown.Item>
+                            <Dropdown.Item >Academic</Dropdown.Item>
+                            <Dropdown.Item >Other</Dropdown.Item>
+
+                        </Dropdown.Menu>
+                    </Dropdown>
+                    <Dropdown>
+                        <Dropdown.Toggle variant="primary" id="dropdown-basic">
                             Sort
                         </Dropdown.Toggle>
 
@@ -53,7 +66,7 @@ const DisplayTasks = () => {
                 <div className="card flex flex-col gap-2 p-4 bg-slate-50 rounded-lg w-3/4 mx-auto mt-5 ">
 
                     <div className='flex items-center justify-between'>
-                        
+
                         <h2>Task 1</h2>
                         <span className="operation flex items-center justify-center gap-3">
                             <button type="button" class="  flex justify-center items-center text-white bg-gradient-to-r from-green-400 to-green-600 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-3 py-2 text-center me-2 mb-2 gap-3">
