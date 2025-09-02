@@ -1,15 +1,15 @@
 import { useState } from 'react'
-
+import Navbar from './components/Navbar'
 // import './App.css'
-
+import Task from './components/DisplayTasks'
 function App() {
 
 
   return (
     <>
-      <div className="h-screen bg-red-500 flex items-center justify-center">
-        <h1 className="text-5xl font-bold text-white">Tailwind Works 🎉</h1>
-      </div>    </>
+      <Navbar></Navbar>
+      <Task></Task>
+    </>
   )
 }
 
