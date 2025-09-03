@@ -12,12 +12,12 @@ const taskSchema = new mongoose.Schema({
   },
   priority: {
     type: String,
-    enum: ["Low", "Medium", "High"], // optional: restrict to these values
+    enum: ["Low", "Medium", "High"], 
     default: "Low"
   },
   category: {
     type: String,
-    enum: ["Work", "Personal", "Academic", "Other"], // optional
+    enum: ["Work", "Personal", "Academic", "Other"], 
     default: "Other"
   },
   dueDate: {
@@ -25,7 +25,7 @@ const taskSchema = new mongoose.Schema({
     default: null
   },
   tags: {
-    type: [String], // allows multiple tags
+    type: [String],
     default: []
   },
   completed: {
@@ -36,7 +36,7 @@ const taskSchema = new mongoose.Schema({
     type: Date,
     default: null
   }
-}, { timestamps: true }); // adds createdAt and updatedAt
+}, { timestamps: true }); 
 
 const Task = mongoose.models.Task || mongoose.model("Task", taskSchema);
 module.exports = Task;

@@ -71,7 +71,7 @@ const DisplayTasks = ({ setShowAddTask, setEditTaskId }) => {
         <>
          
             <div className='rounded-lg w-full mt-2 px-2 md:px-0 '>
-                <div className='flex flex-col md:flex-row items-center justify-center gap-3 p-3 bg-slate-50 mx-auto w-full md:w-3/5'>
+                <div className='flex flex-col md:flex-row items-center justify-center gap-3 p-3 bg-blue-200 mx-auto w-full  rounded-lg md:w-3/5'>
                     <img src="./search.svg" alt="search" className="w-6 md:w-8" />
                     <input
                         type="text"
@@ -83,7 +83,7 @@ const DisplayTasks = ({ setShowAddTask, setEditTaskId }) => {
                     />
                 </div>
 
-                <div className='flex flex-col sm:flex-row items-center justify-evenly gap-3 sm:gap-5 p-3 bg-slate-50 mx-auto w-full md:w-3/5 mt-3'>
+                <div className='flex flex-col sm:flex-row items-center justify-evenly gap-3 sm:gap-5 p-3 bg-yellow-100 rounded-lg  mx-auto w-full md:w-3/5 mt-1'>
                    
                     <select
                         className="block w-full sm:w-auto p-2 text-sm border border-gray-300 rounded-lg font-semibold bg-blue-300 focus:outline-none focus:ring-1 focus:ring-blue-500"
@@ -134,7 +134,7 @@ const DisplayTasks = ({ setShowAddTask, setEditTaskId }) => {
                         )) && (
                         <div
                             key={task._id || index}
-                            className={`card flex flex-col gap-2 p-4 rounded-lg w-full md:w-4/5 mx-auto mt-5 ${task.completed ? "opacity-35" : "bg-slate-50"}`}
+                            className={`card flex flex-col gap-2 p-4 rounded-lg w-full md:w-4/5 mx-auto mt-5 ${task.completed ? "opacity-35" : "bg-blue-400"} ` }
                         >
                             <div className='flex flex-col sm:flex-row items-start sm:items-center justify-between'>
                                 <h2 className={`${task.completed ? "line-through text-gray-400" : ""} text-lg font-semibold mb-2 sm:mb-0`}>

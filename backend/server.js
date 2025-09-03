@@ -107,7 +107,7 @@ app.post('/api/updateTask', async (req, res) => {
 
   try {
     if (id) {
-      // Update existing task
+      
       const updatedTask = await Task.findByIdAndUpdate(
         id,
         {
@@ -120,7 +120,7 @@ app.post('/api/updateTask', async (req, res) => {
           completed: form.completed,
           completedAt: form.completed ? new Date() : null
         },
-        { new: true } // return the updated document
+        { new: true } 
       );
       res.json({ success: true });
     }

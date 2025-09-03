@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema({
   googleId: {
     type: String,
     required: true,
-    unique: true, // ensures each Google account is unique
+    unique: true,
   },
   email: {
     type: String,
@@ -21,5 +21,4 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-// Export the model
 module.exports = mongoose.model('User', userSchema);

@@ -20,8 +20,13 @@ const Navbar = ({ setShowAddTask, showAddTask, showAnalytics, setShowAnalytics }
     // };
 
     return (
-        <div className="flex flex-col md:flex-row items-center justify-around mt-2 border border-gray-300 rounded-lg p-3 bg-slate-50">
-            <h1 className='font-bold text-5xl'>Clario</h1>
+
+        
+        <div className="flex flex-col md:flex-row items-center justify-around mt-2 border border-gray-300 rounded-lg p-3 bg-blue-100">
+            <div className='flex gap-3'>            <img src="/logo1.svg" className='color-blue-500 w-10' alt="" />
+                <h1 className='font-bold text-5xl'>Clario</h1>
+            </div>
+
             <ul className='flex items-center justify-center gap-10'>
                 <li><button><img src="/analytics.svg" onClick={() => {
                     setShowAnalytics(true)
