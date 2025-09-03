@@ -69,91 +69,84 @@ const DisplayTasks = ({ setShowAddTask, setEditTaskId }) => {
     };
     return (
         <>
-            <div className=' rounded-lg w-auto mt-2'>
-                <div className='flex items-center justify-center gap-3   p-3 bg-slate-50   mx-auto w-3/5'>
-                    <img src="./search.svg" alt="" />
-                    <input type="text" id="search-navbar" value={searchTerm} onChange={(e) => { setSearchTerm(e.target.value) }} className="block  border p-2 w-full text-sm text-gray-900  rounded-lg bg-gray-50 focus:outline-none" placeholder="Search..." />
-
-                </div>
-                <div className='flex items-center justify-evenly gap-5  p-3 bg-slate-50   mx-auto w-3/5'>
-                    <div className='Staus select'>
-                        <select
-                            className="block w-full p-2 text-sm  border border-gray-300 rounded-lg font-semibold bg-blue-300 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                            onChange={(e) => handleFilterChange('status', e.target.value)}
-                        >
-                            <option value="All">Status</option>
-                            <option value="Pending">Pending</option>
-                            <option value="Completed">Completed</option>
-                        </select>
-                    </div>
-
-
-                    <div className='Priority select'>
-                        <select
-                            className="block w-full p-2 text-sm border border-gray-300 rounded-lg font-semibold bg-blue-300 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                            onChange={(e) => handleFilterChange('priority', e.target.value)}
-                        >
-                            <option value="All">Priority</option>
-                            <option value="High">High</option>
-                            <option value="Medium">Medium</option>
-                            <option value="Low">Low</option>
-                        </select>
-                    </div>
-
-
-                    <div className='Category select'>
-                        <select
-                            className="block w-full p-2 text-sm border border-gray-300 rounded-lg font-semibold bg-blue-300 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                            onChange={(e) => handleFilterChange('category', e.target.value)}
-                        >
-                            <option value="All">Category</option>
-                            <option value="Work">Work</option>
-                            <option value="Personal">Personal</option>
-                            <option value="Academic">Academic</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-
-
-                    <div className='Sort select'>
-                        <select
-                            className="block w-full p-2 text-sm border border-gray-300 rounded-lg font-semibold bg-blue-300 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                            onChange={(e) => handleFilterChange('sort', e.target.value)}
-                        >
-                            <option value="None">Sort</option>
-                            <option value="By due date">By due date</option>
-                            <option value="By Created">By Created</option>
-                        </select>
-                    </div>
+         
+            <div className='rounded-lg w-full mt-2 px-2 md:px-0 '>
+                <div className='flex flex-col md:flex-row items-center justify-center gap-3 p-3 bg-slate-50 mx-auto w-full md:w-3/5'>
+                    <img src="./search.svg" alt="search" className="w-6 md:w-8" />
+                    <input
+                        type="text"
+                        id="search-navbar"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="block border p-2 w-full text-sm text-gray-900 rounded-lg bg-gray-50 focus:outline-none"
+                        placeholder="Search..."
+                    />
                 </div>
 
+                <div className='flex flex-col sm:flex-row items-center justify-evenly gap-3 sm:gap-5 p-3 bg-slate-50 mx-auto w-full md:w-3/5 mt-3'>
+                   
+                    <select
+                        className="block w-full sm:w-auto p-2 text-sm border border-gray-300 rounded-lg font-semibold bg-blue-300 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                        onChange={(e) => handleFilterChange('status', e.target.value)}
+                    >
+                        <option value="All">Status</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+
+                    
+                    <select
+                        className="block w-full sm:w-auto p-2 text-sm border border-gray-300 rounded-lg font-semibold bg-blue-300 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                        onChange={(e) => handleFilterChange('priority', e.target.value)}
+                    >
+                        <option value="All">Priority</option>
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                    </select>
+
+                  
+                    <select
+                        className="block w-full sm:w-auto p-2 text-sm border border-gray-300 rounded-lg font-semibold bg-blue-300 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                        onChange={(e) => handleFilterChange('category', e.target.value)}
+                    >
+                        <option value="All">Category</option>
+                        <option value="Work">Work</option>
+                        <option value="Personal">Personal</option>
+                        <option value="Academic">Academic</option>
+                        <option value="Other">Other</option>
+                    </select>
+
+                    
+                    
+                </div>
             </div>
 
-            <div className='Tasks'>
+            
+            <div className='Tasks mt-4 px-2 md:px-0'>
                 {tasks.map((task, index) =>
-                    // Add filtering condition here
-                    ((searchTerm === "" || task.title.toLowerCase().includes(searchTerm.toLowerCase()))
-                        &&
-                        // Category filter
-                        (filters.category === "All" || task.category === filters.category)
-                        &&
-                        // Priority filter
-                        (filters.priority === "All" || task.priority === filters.priority)
-                        &&
-                        // Status filter
+                    ((searchTerm === "" || task.title.toLowerCase().includes(searchTerm.toLowerCase())) &&
+                        (filters.category === "All" || task.category === filters.category) &&
+                        (filters.priority === "All" || task.priority === filters.priority) &&
                         (filters.status === "All" ||
                             (filters.status === "Completed" && task.completed) ||
                             (filters.status === "Pending" && !task.completed)
-                        )
-                    ) && (
-                        <div key={task._id || index} className={`card flex flex-col gap-2 p-4 rounded-lg w-3/5 mx-auto mt-5 ${task.completed ? " opacity-35" : "bg-slate-50"
-                            }`}>
-                            <div className='flex items-center justify-between'>
-                                <h2 className={`${task.completed ? "line-through text-gray-400" : ""}`}>
+                        )) && (
+                        <div
+                            key={task._id || index}
+                            className={`card flex flex-col gap-2 p-4 rounded-lg w-full md:w-4/5 mx-auto mt-5 ${task.completed ? "opacity-35" : "bg-slate-50"}`}
+                        >
+                            <div className='flex flex-col sm:flex-row items-start sm:items-center justify-between'>
+                                <h2 className={`${task.completed ? "line-through text-gray-400" : ""} text-lg font-semibold mb-2 sm:mb-0`}>
                                     {task.title}
-                                </h2>                                <span className="operation flex items-center justify-center gap-3">
-                                    <button type="button" onClick={() => handleComplete(task._id)} className="flex justify-center items-center text-white bg-gradient-to-r from-green-400 to-green-600 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-3 py-2 text-center gap-3">
-                                        Complete Task
+                                </h2>
+                                <span className="operation flex items-center gap-3">
+                                    <button
+                                        type="button"
+                                        onClick={() => handleComplete(task._id)}
+                                        className="flex justify-center items-center text-white bg-gradient-to-r from-green-400 to-green-600 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-3 py-2 gap-2"
+                                    >
+                                        Complete
                                     </button>
 
                                     <lord-icon
@@ -161,7 +154,7 @@ const DisplayTasks = ({ setShowAddTask, setEditTaskId }) => {
                                         trigger="hover"
                                         colors="primary:#1591EA"
                                         style={{ width: "25px", height: "25px", cursor: "pointer" }}
-                                        onClick={() => { handleUpdate(task._id) }}
+                                        onClick={() => handleUpdate(task._id)}
                                     />
 
                                     <lord-icon
@@ -169,32 +162,33 @@ const DisplayTasks = ({ setShowAddTask, setEditTaskId }) => {
                                         trigger="hover"
                                         colors="primary:#1591EA"
                                         style={{ width: "25px", height: "25px", cursor: "pointer" }}
-                                        onClick={() => { handleDelete(task._id) }}
+                                        onClick={() => handleDelete(task._id)}
                                     />
                                 </span>
                             </div>
 
-                            <p>{task.description || "No description."}</p>
+                            <p className='mt-2'>{task.description || "No description."}</p>
 
-                            <div className="info flex items-center justify-start gap-5">
+                            <div className="info flex flex-col sm:flex-row items-start sm:items-center justify-start gap-3 sm:gap-5 mt-3">
                                 <div className="tags flex items-center gap-2">
-                                    Tags :
+                                    Tags:
                                     {task.tags && task.tags.length > 0 ? (
                                         task.tags.map((tag, i) => (
-                                            <div key={i} className='bg-blue-200 rounded-3xl p-2 w-auto text-[12px]'>{tag}</div>
+                                            <div key={i} className='bg-blue-200 rounded-3xl p-1 px-2 w-auto text-[12px]'>{tag}</div>
                                         ))
                                     ) : (
-                                        <div className='bg-gray-200 rounded-3xl p-2 w-auto text-[12px]'>No tags</div>
+                                        <div className='bg-gray-200 rounded-3xl p-1 px-2 w-auto text-[12px]'>No tags</div>
                                     )}
                                 </div>
 
                                 <div className="tags flex items-center gap-2">
-                                    Category :
-                                    <div className='bg-yellow-200 rounded-3xl p-2 w-auto text-[12px]'>{task.category || "No category"}</div>
+                                    Category:
+                                    <div className='bg-yellow-200 rounded-3xl p-1 px-2 w-auto text-[12px]'>{task.category || "No category"}</div>
                                 </div>
+
                                 <div className="tags flex items-center gap-2">
-                                    Priority :
-                                    <div className='bg-red-300 rounded-3xl p-2 w-auto text-[12px]'>{task.priority || "No priority"}</div>
+                                    Priority:
+                                    <div className='bg-red-300 rounded-3xl p-1 px-2 w-auto text-[12px]'>{task.priority || "No priority"}</div>
                                 </div>
 
                                 <div className="due">
@@ -204,11 +198,9 @@ const DisplayTasks = ({ setShowAddTask, setEditTaskId }) => {
                         </div>
                     )
                 )}
-
-
-
             </div>
         </>
+
     )
 }
 

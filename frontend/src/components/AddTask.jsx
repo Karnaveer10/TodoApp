@@ -65,7 +65,7 @@ const AddTask = ({ setShowAddTask, editTaskId, setEditTaskId }) => {
 
     }
     return (
-        <div className='card flex flex-col gap-3 p-4 bg-slate-50 rounded-lg w-1/3 mx-auto mt-5 text-left'>
+        <div className='card flex flex-col gap-3 p-4 bg-slate-50 rounded-lg w-[95%] md:w-3/5 lg:w-1/3 mx-auto mt-5 text-left'>
             <h2 className='mx-auto'>Task</h2>
             <h4> Title</h4>
             <input type="text" className='border p-2 w-full text-sm text-gray-900  rounded-lg bg-gray-50 focus:outline-none' placeholder='Enter ask Title' value={form.title} onChange={(e) => { setform({ ...form, title: e.target.value }) }} />

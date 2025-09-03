@@ -64,7 +64,7 @@ const Analytics = ({ setShowAnalytics, showAnalytics, setShowAddTask }) => {
         <>
 
             <h2 className='text-center mb-4 mt-4'>Tasks Left</h2>
-            <div className="grid grid-cols-4 md:grid-cols-4 gap-4 mb-6 w-3/4 mx-auto">
+            <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6 w-3/4 mx-auto">
                 {Object.entries(counters).map(([key, value]) => {
                     const remaining = value.total - value.completed;
                     const progress = value.total ? ((value.completed / value.total) * 100) : 0;
