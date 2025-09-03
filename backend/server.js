@@ -5,18 +5,45 @@ const app = express();
 app.use(express.json())
 app.use(cors())
 const router = express.Router();
-// const path = require('path');
-// const cookieParser = require('cookie-parser');
+const path = require('path');
+const jwt = require('jsonwebtoken');
+
+const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose')
 const connectDB = require('./config/connectDb')
 const port = process.env.PORT || 3000;
 const Task = require('./models/TaskModel');
+// const authenticateJWT = require('./middleware/auth');
+// const axios = require ('axios')
+// const User = require ('./models/UserModel')
 connectDB()
 
 
 app.get("/", (req, res) => {
   res.send("API Working")
 })
+
+// app.post('/api/google-login', async (req, res) => {
+//   const { idToken } = req.body;
+
+//   try {
+//     const response = await axios.get(`https://oauth2.googleapis.com/tokeninfo?id_token=${idToken}`);
+//     const { email, sub: googleId, name } = response.data;
+
+//     let user = await User.findOne({ googleId });
+//     if (!user) {
+//       user = await User.create({ googleId, email, name });
+//     }
+//     const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_TOKEN_SECRET, { expiresIn: '7d' });
+//     res.json({ token, user: { id: user._id, name: user.name, email: user.email } });
+
+//   } catch (error) {
+//     console.error(error);
+//     res.status(401).json({ message: 'Invalid Google ID token' });
+//   }
+// });
+
+
 app.get('/api/getTasks', async (req, res) => {
   try {
     const Taskdocs = await Task.find({})
