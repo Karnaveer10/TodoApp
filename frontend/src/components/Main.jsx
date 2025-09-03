@@ -11,10 +11,35 @@ const Main = () => {
 
     return (
         <>
-            <Navbar setShowAddTask={setShowAddTask} showAddTask={showAddTask} showAnalytics={showAnalytics} setShowAnalytics={setShowAnalytics} />
-            {showAnalytics ? (<Analytics setShowAnalytics={setShowAnalytics} showAnalytics={showAnalytics}/>) : showAddTask ? (<AddTaskset ShowAddTask={setShowAddTask} setEditTaskId={setEditTaskId} editTaskId={editTaskId} />) : (<DisplayTasks setShowAddTask={setShowAddTask} setEditTaskId={setEditTaskId} />
-            )}        
-            </>
+            <Navbar
+                setShowAddTask={setShowAddTask}
+                showAddTask={showAddTask}
+                showAnalytics={showAnalytics}
+                setShowAnalytics={setShowAnalytics}
+            />
+            {showAnalytics && !showAddTask && (
+                <Analytics
+                    setShowAnalytics={setShowAnalytics}
+                    showAnalytics={showAnalytics}
+                    setShowAddTask={setShowAddTask}
+                />
+            )}
+
+            {!showAnalytics && showAddTask && (
+                <AddTask
+                    setShowAddTask={setShowAddTask}
+                    setEditTaskId={setEditTaskId}
+                    editTaskId={editTaskId}
+                />
+            )}
+
+            {!showAnalytics && !showAddTask && (
+                <DisplayTasks
+                    setShowAddTask={setShowAddTask}
+                    setEditTaskId={setEditTaskId}
+                />
+            )}
+        </>
     )
 }
 
