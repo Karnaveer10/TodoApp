@@ -1,12 +1,57 @@
-# React + Vite
+# Clario – Organize for Clarity
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Clario is a modern, responsive **ToDo application** designed to help you organize your tasks efficiently. You can **create, read, update, and delete tasks**, filter them by **category, status, and priority**, and view **analytics** for completed and remaining tasks.  
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## **Features**
 
-## Expanding the ESLint configuration
+- **CRUD Tasks:** Add, edit, and delete tasks easily.  
+- **Filtering:** Filter tasks by **category (Academics, Work, Personal)**, **status (Completed / Pending)**, and **priority (Low, Medium, High)**.  
+- **Analytics:** Quickly see how many tasks are completed and how many are pending.  
+- **Responsive Design:** Works perfectly on mobile, tablet, and desktop.  
+- **Clean UI:** Minimalist and user-friendly design for better productivity.  
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## **Tech Stack**
+
+**Frontend:**  
+- React  
+- Vite  
+- Tailwind CSS  
+- Axios  
+
+**Backend:**  
+- Node.js  
+- Express.js  
+- MongoDB (Mongoose)  
+
+**Deployment:**  
+- Frontend: Vercel  
+- Backend: Vercel  
+
+---
+
+## **Screenshots**
+
+### **Dashboard / Task List**
+![Dashboard](./screenshots/sc1.png)  
+
+### **Add / Edit Task**
+![Add Task](./screenshots/sc2.png)  
+
+### **Analytics**
+![Analytics](./screenshots/sc3.png)  
+
+
+---
+
+## **Demo / Deployment**
+
+Check out the live app here:  
+[**Clario Live Demo**](https://todo-app-gdg.vercel.app/)  
+> **Note:** For best results, open the app in an **incognito/private browser window**.  
+> Some browser extensions (like ad blockers or privacy tools) may block certain API requests, causing tasks or analytics to not load correctly. Incognito mode ensures no extensions interfere with the app.  
+
+---
