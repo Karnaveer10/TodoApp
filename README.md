@@ -46,12 +46,3 @@ Clario is a modern, responsive **ToDo application** designed to help you organiz
 
 
 ---
-
-## **Demo / Deployment**
-
-Check out the live app here:  
-[**Clario Live Demo**](https://todo-app-gdg.vercel.app/)  
-> **Note:** For best results, open the app in an **incognito/private browser window**.  
-> Some browser extensions (like ad blockers or privacy tools) may block certain API requests, causing tasks or analytics to not load correctly. Incognito mode ensures no extensions interfere with the app.  
-
----
